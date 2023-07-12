@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+    title: Jobs API
+    contact: {}
+    version: "1.0"
+jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
+servers:
+    - url: https://temp-jobs-api-project-2023.onrender.com/api/v1
+      variables: {}
+paths:
+    /auth/register:
+        post:
+            tags:
+                - Auth
+            summary: REGISTER User
+            operationId: REGISTERUser
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/REGISTERUserRequest"
+                                - examples:
+                                      - name: lovelychester
+                                      - email: lovelychester061422@gmail.com
+                                      - password: lovelychester
+                            contentMediaType: application/json
+                        example:
+                            name: lovelychester
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+        parameters: []
+    /auth/login:
+        post:
+            tags:
+                - Auth
+            summary: LOGIN User
+            operationId: LOGINUser
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/LOGINUserRequest"
+                                - examples:
+                                      - email: lovely2621@gmail.com
+                                        password: lovelychester
+                            contentMediaType: application/json
+                        example:
+                            email: lovely2621@gmail.com
+                            password: lovelychester
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+        parameters: []
+    /jobs:
+        post:
+            tags:
+                - Jobs
+            summary: CREATE Job
+            operationId: CREATEJob
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/CREATEJobRequest"
+                                - examples:
+                                      - company: netflix
+                                        position: backend developer
+                            contentMediaType: application/json
+                        example:
+                            company: netflix
+                            position: backend developer
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+        get:
+            tags:
+                - Jobs
+            summary: GET All Jobs
+            operationId: GETAllJobs
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+        parameters: []
+    /jobs/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+              description: The job ID
+        get:
+            tags:
+                - Jobs
+            summary: GET Single Job
+            operationId: GETSingleJob
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+        patch:
+            tags:
+                - Jobs
+            summary: UPDATE Job
+            operationId: UPDATEJob
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/UPDATEJobRequest"
+                                - examples:
+                                      - company: random inc
+                                        position: backend developer
+                            contentMediaType: application/json
+                        example:
+                            company: random inc
+                            position: backend developer
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+        delete:
+            tags:
+                - Jobs
+            summary: DELETE Job
+            operationId: DELETEJob
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+components:
+    schemas:
+        REGISTERUserRequest:
+            title: REGISTERUserRequest
+            required:
+                - name
+            type: object
+            properties:
+                name:
+                    type: string
+            examples:
+                - name: lovelychester
+        LOGINUserRequest:
+            title: LOGINUserRequest
+            required:
+                - email
+                - password
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+            examples:
+                - email: lovely2621@gmail.com
+                  password: lovelychester
+        CREATEJobRequest:
+            title: CREATEJobRequest
+            required:
+                - company
+                - position
+            type: object
+            properties:
+                company:
+                    type: string
+                position:
+                    type: string
+            examples:
+                - company: netflix
+                  position: backend developer
+        UPDATEJobRequest:
+            title: UPDATEJobRequest
+            required:
+                - company
+                - position
+            type: object
+            properties:
+                company:
+                    type: string
+                position:
+                    type: string
+            examples:
+                - company: random inc
+                  position: backend developer
+    securitySchemes:
+        bearer:
+            type: http
+            scheme: bearer
+security: []
+tags:
+    - name: Auth
+      description: ""
+    - name: Jobs
+      description: ""
